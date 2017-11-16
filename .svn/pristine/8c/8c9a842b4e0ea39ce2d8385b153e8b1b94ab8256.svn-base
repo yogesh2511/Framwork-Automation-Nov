@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Login Test Suite">
+
+<listeners>
+
+	<listener class-name="org.uncommons.reportng.HTMLReporter"></listener>
+	<listener class-name="org.uncommons.reportng.JUnitXMLReporter"></listener>
+	<listener class-name="com.rangam.SourceVets.Listeners.CustomListeners"></listener>
+	
+	
+</listeners>
+  <test name="Login Test">
+    <classes>
+    
+      <class name="com.rangam.SourceVets.TestCases.RegistrationTest"/>
+      <class name="com.rangam.SourceVets.TestCases.VeteranProfileTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

@@ -1,0 +1,5 @@
+set projectLocation=Z:\Java_Project\Workspace\UIAutomation-master\UIAutomation-master
+cd %projectLocation%
+set classpath=%projectLocation%\bin;%projectLocation%\lib\*
+java org.testng.TestNG %projectLocation%\LoginTestNG.xml
+pause

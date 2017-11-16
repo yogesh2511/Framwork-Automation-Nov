@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [New Requirement suite]">
+  <listeners>
+    <listener class-name="com.test.automation.UIAutomation.customListener.Listener"/>
+  </listeners>
+  <test name="Test(failed)">
+    <classes>
+      <class name="com.test.automation.UIAutomation.tests.NewRequirementTest">
+        <methods>
+          <include name="login" invocation-numbers="0"/>
+          <include name="fillRequirement" invocation-numbers="1 2 3 4 5 6 7 8 9"/>
+          <include name="fillOtheLocation"/>
+          <include name="close"/>
+          <include name="SelectHeader"/>
+          <include name="setUp1"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- com.test.automation.UIAutomation.tests.NewRequirementTest -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [New Requirement suite] -->
