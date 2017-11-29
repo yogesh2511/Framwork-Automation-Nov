@@ -5,13 +5,13 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import com.rangam.sourcpros.utility.ResourceHelper;
 import com.relevantcodes.extentreports.LogStatus;
 import com.test.automation.UIAutomation.config.EmailConfiguration;
 import com.test.automation.UIAutomation.errorScreenShot.ErrorScreenShot;
 import com.test.automation.UIAutomation.mailMoniter.MonitoringMail;
 import com.test.automation.UIAutomation.mailMoniter.ZipFiles;
 import com.test.automation.UIAutomation.testBase.TestBase;
+import com.test.automation.UIAutomation.utility.ResourceHelper;
 
 public class Listener extends TestBase implements ITestListener {
 

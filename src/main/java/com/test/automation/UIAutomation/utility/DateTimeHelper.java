@@ -1,4 +1,4 @@
-package com.rangam.sourcpros.utility;
+package com.test.automation.UIAutomation.utility;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

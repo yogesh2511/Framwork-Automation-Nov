@@ -1,4 +1,4 @@
-package com.rangam.sourcpros.helper;
+package com.test.automation.UIAutomation.helper;
 
 import java.util.concurrent.TimeUnit;
 

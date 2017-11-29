@@ -1,9 +1,9 @@
-package com.rangam.sourcpros.helper;
+package com.test.automation.UIAutomation.helper;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-import com.rangam.sourcpros.utility.ResourceHelper;
+import com.test.automation.UIAutomation.utility.ResourceHelper;
 
 @SuppressWarnings("rawtypes")
 public class LoggerHelper {

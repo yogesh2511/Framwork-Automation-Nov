@@ -1,4 +1,4 @@
-package com.rangam.sourcpros.helper;
+package com.test.automation.UIAutomation.helper;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
