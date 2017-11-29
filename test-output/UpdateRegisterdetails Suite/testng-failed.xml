@@ -8,7 +8,7 @@
     <classes>
       <class name="com.test.automation.UIAutomation.tests.UpdateRegisterdetailsTest">
         <methods>
-          <include name="login" invocation-numbers="0"/>
+          <include name="login" invocation-numbers="1"/>
           <include name="close"/>
           <include name="setUp1"/>
           <include name="setUp"/>

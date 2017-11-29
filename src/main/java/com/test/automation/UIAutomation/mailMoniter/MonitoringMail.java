@@ -42,12 +42,21 @@ public class MonitoringMail
 
 	
 	{	
-	      Properties props = new Properties();
+		  // sets SMTP server properties
+	    /*  Properties props = new Properties();
 	      props.put("mail.smtp.auth", "false");
-	      props.put("mail.smtp.starttls.enable", "true");
+	      props.put("mail.smtp.starttls.enable", "false");
+	      props.put("mail.smtp.host", host);
+	      props.put("mail.smtp.port", port);*/
+
+	      Properties props = new Properties();
 	      props.put("mail.smtp.host", host);
 	      props.put("mail.smtp.port", port);
-
+	      props.put("mail.smtp.auth", "false");//default is true
+	      props.put("mail.smtp.starttls.enable", "true");
+	      props.put("mail.user", username);
+	      props.put("mail.password", password);
+	      
 	      // Get the Session object.
 	      Session session = Session.getInstance(props,
 	         new javax.mail.Authenticator() {

@@ -35,12 +35,13 @@ public class Listener extends TestBase implements ITestListener {
 		if (result.getStatus() == ITestResult.FAILURE) 
 		{
 			try {
-
+				//test.log(LogStatus.FAIL,  "HTML", "Usage: BOLD TEXT");
 				String methodName = result.getName();
 				errorImagepath = ErrorScreenShot.getScreenShot(methodName, ".png", "FAILURE");
 				test.log(LogStatus.FAIL, result.getThrowable());
 				test.log(LogStatus.FAIL,errorImagepath);
 				test.log(LogStatus.FAIL, "FAILURE method screenshot below" + test.addScreenCapture(errorImagepath));
+								
 				//test.log(LogStatus.FAIL, test.addScreenCapture(errorImagepath));
 			} catch (Exception e)
 
@@ -112,9 +113,9 @@ public class Listener extends TestBase implements ITestListener {
 	@Override
 	public void onFinish(ITestContext arg0) {
 		try {
-			// extent.flush();
 			String outputFolderPath = ResourceHelper.getResourcePath("\\Output");
-			ZipFiles.zip(outputFolderPath, "Report.zip");
+			System.out.println("outputFolderPath:"+outputFolderPath);
+			ZipFiles.zip(outputFolderPath,EmailConfiguration.attachmentName);
 			MonitoringMail.sendmail(EmailConfiguration.server,
 					EmailConfiguration.port,
 					EmailConfiguration.from,

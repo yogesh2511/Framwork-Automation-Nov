@@ -89,7 +89,7 @@ public class EmailAttachmentSender {
 	        String host = "mail.rangam.com";
 	        String port = "25";
 	        String mailFrom = "yogeshsolanki@rangam.com";
-	        String password = "aug@2017";
+	        String password = "nov@2017";
 	 
 	        // message info
 	        String mailTo = "yogeshsolanki@rangam.com";

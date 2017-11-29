@@ -21,8 +21,8 @@ public class ExtentReportDemo extends TestBase
 		// HTMLReporter.config().setAutoCreateRelativePathMedia(true);
 		 //System.getProperty("usr.dir")+"/extentconfig/extent-config.xml"
 		
-		 System.out.println("RootDirectory:"+RootDirectory);
-		 String extendpath=RootDirectory+"\\extentconfig\\extent-config.xml";
+		
+		 String extendpath=RootDirectory+"\\resources\\extentconfig\\extent-config.xml";
 		 System.out.println("extendpath:"+extendpath);
 		 try{
 			/* DateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy_HH:mm:ss");
@@ -35,6 +35,8 @@ public class ExtentReportDemo extends TestBase
 			.addSystemInfo("Enviroment", "QA")
 			.addSystemInfo("User Name", "Yogesh solanki");
 			extent.loadConfig(new File(extendpath));
+			/*extent.assignProject("Source-Pros USA");*/
+			//extent.setTestRunnerOutput("testing");
 			
 		 }
 		 catch(Exception ex)

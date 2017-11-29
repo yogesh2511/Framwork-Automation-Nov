@@ -13,13 +13,13 @@ import com.test.automation.UIAutomation.testBase.TestBase;
 public class ZipFiles extends TestBase
 {
 	// make zip of reports
-	public static void zip(String filepath,String filname)
-	{
-		
+	public static void zip(String filepath,String filename)
+	{		
 	 	try
 	 	{
 	 		File inFolder=new File(filepath);
-	 		File outFolder=new File(filname);
+	 		//File outFolder=new File("Reports.zip");
+	 		File outFolder=new File(filename);
 	 		ZipOutputStream out = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(outFolder)));
 	 		BufferedInputStream in = null;
 	 		byte[] data  = new byte[1000];

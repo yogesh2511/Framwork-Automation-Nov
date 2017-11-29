@@ -73,7 +73,7 @@ public class CandidateListPage extends TestBase
 			contactnumber = com.test.automation.UIAutomation.config.ElementLoad.getWebElement("ContactNumber", CandidateListPropertyFile);
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
 		return contactnumber;

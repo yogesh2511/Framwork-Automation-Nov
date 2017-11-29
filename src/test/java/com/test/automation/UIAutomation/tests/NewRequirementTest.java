@@ -1,18 +1,11 @@
 package com.test.automation.UIAutomation.tests;
 
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.testng.SkipException;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.beust.jcommander.internal.Lists;
 import com.relevantcodes.extentreports.LogStatus;
 import com.test.automation.UIAutomation.testBase.TestBase;
 import com.test.automation.UIAutomation.uiActions.HomePage;
@@ -65,7 +58,7 @@ public class NewRequirementTest extends TestBase
 			test.log(LogStatus.INFO, "Login method successfully:");
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			log.info(e.getMessage());
 		}
 		}
