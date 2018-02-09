@@ -7,8 +7,10 @@
 	<!-- <listener class-name="com.test.automation.UIAutomation.customListener.RetryListener"></listener> -->
 	</listeners>
 	<suite-files>	
-		<suite-file path="LoginTestNG.xml" />			
-		<suite-file path="NewRequirementTest.xml" />	
-		<suite-file path="UpdateRegisterdetails.xml" />	
+		<suite-file path="LoginTestNG.xml" />	
+		<suite-file path="DashboardAdminHeaderTest.xml"/>
+		<suite-file path="AssessmentCandidateTest.xml"/>		
+		<suite-file path="NewRequirementTest.xml" />		
+		 <suite-file path="UpdateRegisterdetails.xml" /> 	
 	</suite-files>
 </suite>
