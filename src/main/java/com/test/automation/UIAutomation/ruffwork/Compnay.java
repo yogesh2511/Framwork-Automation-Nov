@@ -69,26 +69,27 @@ public class Compnay
 		System.out.println();
 		System.out.println("---------------------");
 		
-		Iterator it=vl.iterator();
+		/*Iterator it=vl.iterator();
 		while(it.hasNext())
 		{
 			System.out.println(it.next());
-		}
+		}*/
 		
-		System.out.println();
+		//System.out.println();
 		
 	/*	ListIterator li= vl.listIterator();
 		while (li.hasNext()) 
 		{
 			System.out.println(li.next());
 		}*/
-		System.out.println();
-		System.out.println("Reverse order:");
+		//System.out.println();
+		ListIterator li1= vl.listIterator();
+	/*	System.out.println("Reverse order:");
 		ListIterator li1= vl.listIterator();
 		for(int i=0;i<vl.size();i++)
 		{
-			System.out.println(li1.next());
-		}
+			li1.next();
+		}*/
 		System.out.println("Reverse order2:");
 		while (li1.hasPrevious()) 
 		{

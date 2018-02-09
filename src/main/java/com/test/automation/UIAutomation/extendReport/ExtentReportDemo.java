@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import com.relevantcodes.extentreports.DisplayOrder;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.test.automation.UIAutomation.testBase.TestBase;
+import com.test.automation.UIAutomation.utility.ResourceHelper;
 
 public class ExtentReportDemo extends TestBase
 {
@@ -22,7 +23,7 @@ public class ExtentReportDemo extends TestBase
 		 //System.getProperty("usr.dir")+"/extentconfig/extent-config.xml"
 		
 		
-		 String extendpath=RootDirectory+"\\resources\\extentconfig\\extent-config.xml";
+		 String extendpath=ResourceHelper.getResourcePath("\\resources\\extentconfig\\extent-config.xml");
 		 System.out.println("extendpath:"+extendpath);
 		 try{
 			/* DateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy_HH:mm:ss");

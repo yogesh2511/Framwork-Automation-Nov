@@ -13,10 +13,7 @@ import com.test.automation.UIAutomation.testBase.TestBase;
 
 public class EmailConfiguration extends TestBase 
 {
-	/*public static String[] attachFiles = new String[3];
-	 attachFiles[0] = "e:/Test/Picture.png";
-     attachFiles[1] = "e:/Test/Music.mp3";
-     attachFiles[2] = "e:/Test/Video.mp4";*/
+	
 	Properties or;
 	File file;
 	FileInputStream input;

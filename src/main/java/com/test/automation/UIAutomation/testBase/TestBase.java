@@ -18,11 +18,14 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import com.test.automation.UIAutomation.LoginPage.LoginPage;
 import com.test.automation.UIAutomation.config.ElementLoad;
 import com.test.automation.UIAutomation.config.EmailConfiguration;
 import com.test.automation.UIAutomation.config.PropertiesfilesLoad;
@@ -30,7 +33,16 @@ import com.test.automation.UIAutomation.customListener.Listener;
 import com.test.automation.UIAutomation.errorScreenShot.ErrorScreenShot;
 import com.test.automation.UIAutomation.excelReader.Excel_Reader;
 import com.test.automation.UIAutomation.extendReport.ExtentReportDemo;
-import com.test.automation.UIAutomation.uiActions.LoginPage;
+import com.test.automation.UIAutomation.helper.AlertHelper;
+import com.test.automation.UIAutomation.helper.BrowserHelper;
+import com.test.automation.UIAutomation.helper.DropDownHelper;
+import com.test.automation.UIAutomation.helper.GenericHelper;
+import com.test.automation.UIAutomation.helper.JavaScriptHelper;
+import com.test.automation.UIAutomation.helper.LoggerHelper;
+import com.test.automation.UIAutomation.helper.VerificationHelper;
+import com.test.automation.UIAutomation.helper.WaitHelper;
+import com.test.automation.UIAutomation.utility.DateTimeHelper;
+import com.test.automation.UIAutomation.utility.ResourceHelper;
 
 import org.openqa.selenium.support.ui.Select;
 
@@ -42,50 +54,59 @@ import org.openqa.selenium.support.ui.Select;
 public class TestBase {
 	public static WebDriver driver = null;
 
-	/*
-	 * public static ExtentReports extent=ExtentReportDemo.ExtentDemo(); public
-	 * static ExtentTest test;
-	 */
 	public static ElementLoad ElementLoaderObj;
-	//public static excelReader reader;
+	// public static excelReader reader;
 	public static Excel_Reader excel;
-	//public static String path;
+	// public static String path;
 	public static String OS = System.getProperty("os.name").toLowerCase();
 	public static Properties Config = new Properties();
-	//public static Properties OR = new Properties();
+	// public static Properties OR = new Properties();
 	public static Properties loginPropertyFile = new Properties();
 	public static Properties hompagePropertyFile = new Properties();
 	public static Properties CandidateDetailsPropertyFile = new Properties();
 	public static Properties CandidateListPropertyFile = new Properties();
 	public static Properties RequirementDetailsPropertyFile = new Properties();
 	public static Properties NewRequirementsDetailsPropertyFile = new Properties();
-	public static FileInputStream fConfig, fhomepage, floginpage, fCandidateDetails, fCandidateList,fRequirementDetailsFIS,fNewRequirementsDetails;//FOR
+	public static Properties DashboardFile = new Properties();
+	public static FileInputStream fConfig, fhomepage, floginpage, fCandidateDetails, fCandidateList,
+			fRequirementDetailsFIS, fNewRequirementsDetails,fDashboard;// FOR
 	public static Properties ORr;
 	public static FileInputStream file;
 	public static ArrayList<String> handles = new ArrayList<String>();
 
-	public static JavascriptExecutor js = (JavascriptExecutor) driver;  
-	public static String RootDirectory = System.getProperty("user.dir");
+	// public static JavascriptExecutor js;
+	// public static String RootDirectory = System.getProperty("user.dir");
 
-	public static String log4jConfPath = System.getProperty("user.dir")+ File.separator + "\\resources\\logs\\log4j.properties";
-    //System.out.println("log4jConfigFile:"+log4jConfigFile);
-	
-	//public static String log4jConfPath = "log4j.properties";
+	/*
+	 * public static String log4jConfPath = System.getProperty("user.dir") +
+	 * File.separator + "\\resources\\logs\\log4j.properties";
+	 */
+	// System.out.println("log4jConfigFile:"+log4jConfigFile);
+
+	// public static String log4jConfPath = "log4j.properties";
 	public static Logger log = Logger.getLogger(TestBase.class.getName());
 	public static WebDriverWait wait;
-	public static String driverPath = RootDirectory + "\\drivers\\";
+	// public static String driverPath = RootDirectory + "\\drivers\\";
 
 	public static ExtentReports extent = ExtentReportDemo.ExtentDemo("AutomationReport");
 	public static ExtentTest test;
 	public static Listener lis = new Listener();
 	public static EmailConfiguration config2 = new EmailConfiguration();
 	public static LoginPage jsp;
-	public static PropertiesfilesLoad pfload;
+	// public static PropertiesfilesLoad pfload;
 	public static ElementLoad elmentload = new ElementLoad();
 	public static ErrorScreenShot errorscrenshot = new ErrorScreenShot();
 
+	// Utility class
+	public static AlertHelper alerhelper;
+	public static BrowserHelper browserhelper;
+	public static DropDownHelper dropdownhelper;
+	public static JavaScriptHelper javascripthelper;
+	public static WaitHelper waithelper;
+
 	@BeforeSuite
 	public static void setUp() {
+
 		if (driver == null) {
 
 			if (OS.contains("mac os x")) {
@@ -93,11 +114,6 @@ public class TestBase {
 					fConfig = new FileInputStream(
 							System.getProperty("user.dir") + "//resources//properties//Config.properties");
 					Config.load(fConfig);
-					// log.debug("Config File Loading");
-					/*fOR = new FileInputStream(
-							System.getProperty("user.dir") + "//resources//properties//OR.properties");
-					OR.load(fOR);*/
-					// log.debug("OR File Loading");
 					fhomepage = new FileInputStream(
 							System.getProperty("user.dir") + "//resources//properties//Requirements.properties");
 					hompagePropertyFile.load(fhomepage);
@@ -113,12 +129,11 @@ public class TestBase {
 					fRequirementDetailsFIS = new FileInputStream(
 							System.getProperty("user.dir") + "//resources//properties//RequirementsDetails.properties");
 					RequirementDetailsPropertyFile.load(fRequirementDetailsFIS);
-					
-					
-					fNewRequirementsDetails = new FileInputStream(
-							System.getProperty("user.dir") + "//resources/properties//NewRequirementsDetails.properties");
+
+					fNewRequirementsDetails = new FileInputStream(System.getProperty("user.dir")
+							+ "//resources/properties//NewRequirementsDetails.properties");
 					NewRequirementsDetailsPropertyFile.load(fNewRequirementsDetails);
-					
+
 					// log.debug("login property File Loaded sucessfully");
 				} catch (Exception e) {
 
@@ -129,37 +144,61 @@ public class TestBase {
 
 				try {
 
+					/*
+					 * fConfig = new FileInputStream(
+					 * System.getProperty("user.dir") +
+					 * "/resources/properties/Config.properties");
+					 */
 					fConfig = new FileInputStream(
-							System.getProperty("user.dir") + "/resources/properties/Config.properties");
+							ResourceHelper.getResourcePath("/resources/properties/Config.properties"));
 					Config.load(fConfig);
 					log.debug("Config File Loaded sucessfully");
-					/*fOR = new FileInputStream(System.getProperty("user.dir") + "/resources/properties/OR.properties");
-					OR.load(fOR);*/
+					/*
+					 * fOR = new FileInputStream(System.getProperty("user.dir")
+					 * + "/resources/properties/OR.properties"); OR.load(fOR);
+					 */
 					log.debug("OR File Loaded sucessfully");
 					fhomepage = new FileInputStream(
-							System.getProperty("user.dir") + "/resources/properties/Requirements.properties");
+							ResourceHelper.getResourcePath("/resources/properties/Requirements.properties"));
+					// System.getProperty("user.dir") +
+					// "/resources/properties/Requirements.properties");
 					hompagePropertyFile.load(fhomepage);
 					log.debug("homepage File Loaded sucessfully");
 					floginpage = new FileInputStream(
-							System.getProperty("user.dir") + "/resources/properties/LoginPage.properties");
+							ResourceHelper.getResourcePath("/resources/properties/LoginPage.properties"));
+					// System.getProperty("user.dir") +
+					// "/resources/properties/LoginPage.properties");
 					loginPropertyFile.load(floginpage);
 					log.debug("login property File Loaded sucessfully");
 					fCandidateDetails = new FileInputStream(
-							System.getProperty("user.dir") + "/resources/properties/CandidateDetails.properties");
+							ResourceHelper.getResourcePath("/resources/properties/CandidateDetails.properties"));
+					// System.getProperty("user.dir") +
+					// "/resources/properties/CandidateDetails.properties");
 					CandidateDetailsPropertyFile.load(fCandidateDetails);
 					fCandidateList = new FileInputStream(
-							System.getProperty("user.dir") + "/resources/properties/CandidateList.properties");
+							ResourceHelper.getResourcePath("/resources/properties/CandidateList.properties"));
+					// System.getProperty("user.dir") +
+					// "/resources/properties/CandidateList.properties");
 					CandidateListPropertyFile.load(fCandidateList);
-					
+
 					fRequirementDetailsFIS = new FileInputStream(
-							System.getProperty("user.dir") + "/resources/properties/RequirementsDetails.properties");
+							ResourceHelper.getResourcePath("/resources/properties/RequirementsDetails.properties"));
+					// System.getProperty("user.dir") +
+					// "/resources/properties/RequirementsDetails.properties");
 					RequirementDetailsPropertyFile.load(fRequirementDetailsFIS);
-					
-					
+
 					fNewRequirementsDetails = new FileInputStream(
-							System.getProperty("user.dir") + "/resources/properties/NewRequirementsDetails.properties");
+							ResourceHelper.getResourcePath("/resources/properties/NewRequirementsDetails.properties"));
+					// System.getProperty("user.dir") +
+					// "/resources/properties/NewRequirementsDetails.properties");
 					NewRequirementsDetailsPropertyFile.load(fNewRequirementsDetails);
 					
+					fDashboard = new FileInputStream(
+							ResourceHelper.getResourcePath("/resources/properties/Dashboard.properties"));
+					// System.getProperty("user.dir") +
+					// "/resources/properties/NewRequirementsDetails.properties");
+					DashboardFile.load(fDashboard);
+
 				} catch (Exception e) {
 
 					e.printStackTrace();
@@ -173,16 +212,19 @@ public class TestBase {
 
 	@BeforeTest
 	public void setUp1() {
-
 		TestBase.initializeTestBaseSetup(Config.getProperty("browser"), Config.getProperty("testsiteurl"));
 		log.info("open url succssfully");
 		System.out.println(Config.getProperty("testsiteurl"));
 		log.info(Config.getProperty("testsiteurl"));
-
+		alerhelper = new AlertHelper(driver);
+		browserhelper = new BrowserHelper(driver);
+		dropdownhelper = new DropDownHelper(driver);
+		javascripthelper = new JavaScriptHelper(driver);
+		waithelper = new WaitHelper(driver);
 	}
 
 	private static WebDriver setDriver(String browserType, String appURL) {
-		
+
 		switch (browserType.toLowerCase()) {
 		case "chrome":
 			driver = initChromeDriver(appURL);
@@ -200,9 +242,9 @@ public class TestBase {
 			// test=extent.startTest("html browser");
 			break;
 		default:
-			log.info("browser :"+ browserType + " is invalid, browser of choice..");
+			log.info("browser :" + browserType + " is invalid, browser of choice..");
 			System.out.println("browser : " + browserType + " is invalid,  browser of choice..");
-			//driver = initFirefoxDriver(appURL);
+			// driver = initFirefoxDriver(appURL);
 		}
 		return driver;
 	}
@@ -210,20 +252,21 @@ public class TestBase {
 	private static WebDriver initChromeDriver(String appURL) {
 
 		// System.out.println("Launching google chrome with new profile..");
-		System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver.exe");
-		
-		
-		
-		 driver = new ChromeDriver();
-		/* EventFiringWebDriver driver = new EventFiringWebDriver(driver1);
-		 WebEventListener eventListener= new WebEventListener();
-		 driver.register(eventListener);*/
-		
+		System.setProperty("webdriver.chrome.driver",
+				ResourceHelper.getResourcePath("\\resources\\drivers\\chromedriver.exe"));
+
+		driver = new ChromeDriver();
+		/*
+		 * EventFiringWebDriver driver = new EventFiringWebDriver(driver1);
+		 * WebEventListener eventListener= new WebEventListener();
+		 * driver.register(eventListener);
+		 */
+
 		// driver = new ChromeDriver();
-			driver.manage().window().maximize();
-			driver.manage().deleteAllCookies();
-			driver.navigate().to(appURL);
-		 
+		driver.manage().window().maximize();
+		driver.manage().deleteAllCookies();
+		driver.navigate().to(appURL);
+
 		// test=extent.startTest("Redirected to URL");
 		return driver;
 	}
@@ -232,9 +275,10 @@ public class TestBase {
 		// System.out.println("Launching firefox with new profile..");
 		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
 		capabilities.setCapability("marionette", true);
-		
-		System.setProperty("webdriver.gecko.driver", driverPath + "geckodriver.exe");
-		 driver = new FirefoxDriver();
+
+		System.setProperty("webdriver.gecko.driver",
+				ResourceHelper.getResourcePath("\\resources\\drivers\\geckodriver.exe"));
+		driver = new FirefoxDriver();
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		driver.navigate().to(appURL);
@@ -243,10 +287,13 @@ public class TestBase {
 	}
 
 	private static WebDriver initIEDriver(String appURL) {
-		System.setProperty("webdriver.ie.driver", driverPath + "IEDriverServer.exe");
-		 driver = new InternetExplorerDriver();
-		 driver.manage().window().maximize();
-			driver.manage().deleteAllCookies();
+		System.setProperty("webdriver.gecko.driver",
+				ResourceHelper.getResourcePath("\\resources\\drivers\\IEDriverServer.exe"));
+		// System.setProperty("webdriver.ie.driver", driverPath +
+		// "IEDriverServer.exe");
+		driver = new InternetExplorerDriver();
+		driver.manage().window().maximize();
+		driver.manage().deleteAllCookies();
 		driver.navigate().to(appURL);
 		// test=extent.startTest("Redirected to URL");
 		return driver;
@@ -255,8 +302,7 @@ public class TestBase {
 	// new HtmlUnitDriver()
 	public static void initializeTestBaseSetup(String browserType, String appURL) {
 		try {
-
-			PropertyConfigurator.configure(log4jConfPath);
+			PropertyConfigurator.configure(ResourceHelper.getResourcePath("\\resources\\logs\\log4j.properties"));
 			setDriver(browserType, appURL);
 			log.info("creating object of " + browserType + "and URL of: " + appURL);
 		} catch (Exception e) {
@@ -266,7 +312,7 @@ public class TestBase {
 
 	public static void waitForVisitibilty(WebElement element) {
 		wait = new WebDriverWait(driver, 60);
-		//wait.until(ExpectedConditions.visibilityOf(element));
+		// wait.until(ExpectedConditions.visibilityOf(element));
 		wait.until(ExpectedConditions.visibilityOf(element));
 	}
 
@@ -316,12 +362,17 @@ public class TestBase {
 		return element.getAttribute(attribute);
 	}
 
+	public static void SelectByText(String tagname, String text) {
+		log.info("Text=" + text + "\t" + "tagname=" + tagname);
+		driver.findElement(By.xpath("//'" + tagname + "'[contains(text(),'" + text + "')]"));
+	}
+
 	public static ElementLoad ElementLoad() {
 
 		try {
 			ElementLoaderObj = new ElementLoad();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		return ElementLoaderObj;
@@ -331,9 +382,9 @@ public class TestBase {
 		String[][] data = null;
 
 		try {
-			String excelpath = RootDirectory + "\\resources\\excel\\" + excelname;
+			String excelpath = ResourceHelper.getBaseResourcePath() + "\\resources\\excel\\" + excelname;
 			log.info("excel path:" + excelpath);
-			//System.out.println("excel path:" + excelpath);
+			// System.out.println("excel path:" + excelpath);
 			excel = new Excel_Reader(excelpath);
 			data = excel.getDataFromSheet(sheetName);
 
@@ -349,11 +400,11 @@ public class TestBase {
 		String data = null;
 
 		try {
-			String excelpath = RootDirectory + "\\resources\\excel\\" + excelname;
+			String excelpath = ResourceHelper.getBaseResourcePath() + "\\resources\\excel\\" + excelname;
 			log.info("excel path:" + excelpath);
-			//System.out.println("excel path:" + excelpath);
+			// System.out.println("excel path:" + excelpath);
 			excel = new Excel_Reader(excelpath);
-			data = excel.getCellData( sheetName,  colName,  rowNum);
+			data = excel.getCellData(sheetName, colName, rowNum);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -362,15 +413,12 @@ public class TestBase {
 		return data;
 
 	}
-	
+
 	public static void getWindowHandle() {
 		try {
-			
 			for (String winHandle : driver.getWindowHandles()) {
 				try {
-
 					handles.add(winHandle);
-
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -412,18 +460,25 @@ public class TestBase {
 			}
 		}
 	}
+
 	
 	
-	public static void JavaExecute(WebElement element)
-	{
+	public static void JavaExecute(WebElement element) {
 		waitForVisitibilty(element);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);		
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 	}
-	
-	
-	@AfterSuite(alwaysRun=true)
-	public static void close()
+
+	@AfterTest(alwaysRun=true)
+	public static void logout()
 	{
+		log.info("**********Logout SourcePros**********");
+
+		test = extent.startTest("Logout SourcePros");
+		test.log(LogStatus.INFO, "Logout SourcePros");
+		driver.findElement(By.xpath("//a[contains(text(),'Logout')]")).click();
+	}
+	@AfterSuite(alwaysRun = true)
+	public static void close() {
 		log.info("**********AfterSuite Close Browser**********");
 
 		test = extent.startTest("AfterSuite Close Browser");
@@ -431,7 +486,8 @@ public class TestBase {
 		test.log(LogStatus.INFO, "Driver quite successfully:");
 		driver.close();
 		driver.quit();
-		
+		driver = null;
+
 	}
 
 }

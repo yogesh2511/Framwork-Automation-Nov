@@ -26,8 +26,8 @@ public class Excel_Reader
 	public XSSFRow row=null;
 	public XSSFCell cell=null;
 
-	//Users/bsingh5/git/POMWithPageFactoryFramework
-	//src/main/java/com/test/automation/uiAutomation/testData.xls;
+	
+	//D:\Java_Project\UIAutomation\resources\excel\TestData.xls;
 	
 	public Excel_Reader(String path) {
 		this.path = path;
@@ -54,7 +54,7 @@ public class Excel_Reader
 				// get sheet from excel workbook
 				//System.out.println("ExcelName : "+ExcelName);
 				//System.out.println("sheetName : "+sheetName);
-				XSSFSheet sheet = workbook.getSheet(sheetName);
+				 sheet = workbook.getSheet(sheetName);
 				// count number of active rows
 				int totalRow = sheet.getLastRowNum() + 1;
 				//System.out.println("totalRow : "+totalRow);
@@ -101,7 +101,7 @@ public class Excel_Reader
 								  }
 								  else
 								  {
-									  Double value = cell.getNumericCellValue();
+									    Double value = cell.getNumericCellValue();
 					                    Long longValue = value.longValue();
 					                    String cellText1 = new String(longValue.toString());
 					                    dataSets[k][j++] = cellText1;	

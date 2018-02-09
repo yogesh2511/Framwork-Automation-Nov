@@ -24,7 +24,7 @@ public class AlertHelper{
 		oLog.info("");
 		getAlert().accept();
 	}
-	
+
 	public void DismissAlert() {
 		oLog.info("");
 		getAlert().dismiss();

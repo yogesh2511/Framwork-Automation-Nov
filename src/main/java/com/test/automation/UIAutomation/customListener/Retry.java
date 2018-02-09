@@ -11,14 +11,14 @@ public class Retry implements IRetryAnalyzer {
 
 	@Override
 	public boolean retry(ITestResult result) {
-		int maxRetryCount = Integer.parseInt(ConfigConfiguration.retryfailedtest);
+		int maxRetryCount = ConfigConfiguration.getRetryfailedtest();
 		if (retryCount < maxRetryCount) {
 			System.out.println(
 					"Retrying tets" + result.getName() + " with status " + getResultStatusName(result.getStatus()));
 			retryCount++;
 			return true;
 		}
-		// TODO Auto-generated method stub
+	
 		return false;
 	}
 
@@ -30,7 +30,7 @@ public class Retry implements IRetryAnalyzer {
 			resultName = "FAILUR";
 		if (status == 3)
 			resultName = "SKIP";
-		// TODO Auto-generated method stub
+		
 		return resultName;
 	}
 

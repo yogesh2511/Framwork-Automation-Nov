@@ -1,23 +1,72 @@
 package com.test.automation.UIAutomation.ruffwork;
 
-import java.util.concurrent.TimeUnit;
+import java.io.File;
+import java.io.IOException;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.test.automation.UIAutomation.testBase.TestBase;
 
-public class tscCalender extends TestBase {
+public class tscCalender{
 
 	
 	public static WebDriver driver;
-	public static void main(String[] args) throws InterruptedException 
+	public static void main(String[] args) throws InterruptedException, IOException 
 	{
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\yogeshsolanki\\Desktop\\Selenium Test Setup\\drivers\\chromedriver.exe");
+		driver=new ChromeDriver();
+		
+		driver.get("http://toolsqa.com/automation-practice-switch-windows/");
+		driver.manage().window().maximize();
+		String parenthandle = driver.getWindowHandle();
+		WebElement element = driver.findElement(By.xpath("//button[@id='button1']"));
+	
+		//Convert web driver object to TakeScreenshot
+        TakesScreenshot scrShot =((TakesScreenshot)driver);
+        //Call getScreenshotAs method to create image file
+         File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
+         //File src=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        //Move image file to new destination
+         File DestFile=new File("C:\\Users\\yogeshsolanki\\Desktop\\Driver\\test.png");     
+         //Copy file at destination
+         FileUtils.copyFile(SrcFile, DestFile);
+		
+		/*
+		File dest=new File("C:\\Users\\yogeshsolanki\\Desktop\\Driver\\test.png");
+		FileUtils.copyDirectory(src, dest);*/
+		 /*Set<String>handles=driver.getWindowHandles();
+        System.out.println(handles.size());
+       for(String handle:handles)
+        {
+        	driver.switchTo().window(handle);
+        	System.out.println("Title:"+driver.getTitle());
+        	
+        }
+        if(driver.getTitle().equals("QA Automation Tools Tutorial"))
+    	{
+    		driver.manage().window().maximize();
+    	 List<WebElement> totalLinks = driver.findElements(By.tagName("a"));//
+    	 List<WebElement> siteLinks = driver.findElements(By.xpath("//*[@id='text-18']/div[2]/b/a"));
+    	 System.out.println("Total links on page="+totalLinks.size()+"\n Site Links="+siteLinks.size());
+    	 Thread.sleep(5000);
+    	 driver.close();
+    	}
+        driver.switchTo().window(parenthandle);
+        System.out.println("last time title:"+driver.getTitle());*/
+       
+		//To maximize the browser
+		//System.out.println(driver.manage().window().getPosition());
+		
+		//System.out.println(driver.manage().window().getPosition());
+		//System.out.println("getpagesource="+getpagesource);
 		/*System.setProperty("webdriver.chrome.driver", "C:\\Users\\yogeshsolanki\\Desktop\\Selenium Test Setup\\drivers\\chromedriver.exe");
 		driver=new ChromeDriver();*/
 		
@@ -40,7 +89,7 @@ public class tscCalender extends TestBase {
         //To print the value
         System.out.println(GetText);*/
 		
-		String url="http://192.168.1.160:5555/wd/hub";
+		/*String url="http://192.168.1.160:5555/wd/hub";
 		DesiredCapabilities capabilitis=new DesiredCapabilities().chrome();
 		capabilitis.setBrowserName("chrome");
 		capabilitis.setPlatform(org.openqa.selenium.Platform.WINDOWS);
@@ -68,7 +117,7 @@ public class tscCalender extends TestBase {
 	        //getText() method to get the text value
 	        String GetText = getCopyText.getText();
 	        //To print the value
-	        System.out.println(GetText);
+	        System.out.println(GetText);*/
 		
 		/*
 		 List<WebElement> selectHeadr = driver.findElements(By.xpath("//h3[@role='tab']"));

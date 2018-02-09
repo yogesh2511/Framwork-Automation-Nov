@@ -14,7 +14,7 @@ import com.test.automation.UIAutomation.testBase.TestBase;
 public class ConfigConfiguration extends TestBase 
 {
 	
-	Properties or;
+	/*Properties or;
 	File file;
 	FileInputStream input;
 	
@@ -28,7 +28,7 @@ public class ConfigConfiguration extends TestBase
 	public static  String RIPLLoginTestData;
 	public static  String SingleLoginTestData;	
 	public static  String RegisterDetailsTestData;
-	public static String UpdateRegisterdetails;
+	public static String UpdateRegisterdetails;*/
 	
 	//testsiteurl=http://demo.sourcepros.com/
 	/*browser=chrome
@@ -44,7 +44,43 @@ public class ConfigConfiguration extends TestBase
 	
 	public static Logger log = Logger.getLogger(ConfigConfiguration.class.getName());
 	
-	public ConfigConfiguration()
+	public static String getTestUrl()
+	{
+		return Config.getProperty("testsiteurl");
+	}
+	public static String getBrowser()
+	{
+		return Config.getProperty("browser");
+	}
+	public static int getImplicitwait()
+	{
+		return Integer.parseInt(Config.getProperty("implicit.wait"));
+	}
+	public static int getRetryfailedtest()
+	{
+		return Integer.parseInt(Config.getProperty("retryfailedtest"));
+	}
+	public static  String getExelSheetName()
+	{
+		return Config.getProperty("exelsheetname");
+	}
+	public static  String getLoginsheetName()
+	{
+		return Config.getProperty("LoginsheetName");
+	}
+	public static String getRIPLLoginTestData()
+	{
+		return Config.getProperty("RIPLLoginTestData");
+	}
+	public static String getRegisterDetailsTestData()
+	{
+		return Config.getProperty("RegisterDetailsTestData");
+	}
+	public static String getUpdateRegisterdetails()
+	{
+		return Config.getProperty("UpdateRegisterdetails");
+	}
+	/*public ConfigConfiguration ()
 	{
 		try {
 			 or=new Properties();
@@ -65,7 +101,7 @@ public class ConfigConfiguration extends TestBase
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-	}
+	}*/
 	
 	
 	
