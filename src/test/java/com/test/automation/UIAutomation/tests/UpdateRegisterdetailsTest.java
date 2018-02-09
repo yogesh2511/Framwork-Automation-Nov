@@ -14,12 +14,12 @@ import org.testng.annotations.Test;
 
 import com.beust.jcommander.internal.Lists;
 import com.relevantcodes.extentreports.LogStatus;
+import com.test.automation.UIAutomation.LandingPage.HomePage;
+import com.test.automation.UIAutomation.LandingPage.Pages;
+import com.test.automation.UIAutomation.LoginPage.LoginPage;
 import com.test.automation.UIAutomation.testBase.TestBase;
-import com.test.automation.UIAutomation.uiActions.HomePage;
-import com.test.automation.UIAutomation.uiActions.LoginPage;
-import com.test.automation.UIAutomation.uiActions.NewRequirement;
-import com.test.automation.UIAutomation.uiActions.Pages;
-import com.test.automation.UIAutomation.uiActions.UpdateRegisterationdetailsPage;
+import com.test.automation.UIAutomation.uiActions.Requirements.NewRequirement;
+import com.test.automation.UIAutomation.uiActions.Requirements.UpdateRegisterationdetailsPage;
 
 public class UpdateRegisterdetailsTest extends TestBase
 {
@@ -37,7 +37,7 @@ public class UpdateRegisterdetailsTest extends TestBase
 		
 		if (runMode.equalsIgnoreCase("n")) {
 			log.info("verifiyLoginWithDifferentRecords method skipped");
-			test = extent.startTest("verifiyLoginWithDifferentRecords");
+			//test = extent.startTest("verifiyLoginWithDifferentRecords");
 			test.log(LogStatus.INFO, "verifiyLoginWithDifferentRecords method skipped");
 			test.log(LogStatus.SKIP, "Login and logout skipped");
 			throw new SkipException("Skipping this exception");
@@ -47,7 +47,7 @@ public class UpdateRegisterdetailsTest extends TestBase
 		
 		log.info("**********starting test**********");
 		
-		test = extent.startTest("login");
+		//test = extent.startTest("login");
 		try {
 			Pages.loginpage();
 			LoginPage.loginToApplication(emailAddress, password);
@@ -66,7 +66,7 @@ public class UpdateRegisterdetailsTest extends TestBase
 	@Test(dependsOnMethods={"login"},enabled=true,alwaysRun=true)
 	public static void SelectHeader() 
 	{
-		test = extent.startTest("SelectHeader");		
+		//test = extent.startTest("SelectHeader");		
 		try {
 			//Pages.homapage().singleHeaderMethod("Emails");
 			test.log(LogStatus.INFO, "Select Header");
@@ -82,7 +82,7 @@ public class UpdateRegisterdetailsTest extends TestBase
 	
 	@Test(dependsOnMethods={"login"},alwaysRun=true)
 	public static void selectPriority()
-	{	test = extent.startTest("selectPriority");
+	{//	test = extent.startTest("selectPriority");
 		try {
 			Pages.homapage();
 			Select(HomePage.priorityCheck(), "Priority");
@@ -99,7 +99,7 @@ public class UpdateRegisterdetailsTest extends TestBase
 	@Test(dependsOnMethods={"selectPriority"},alwaysRun=true)
 	public static void selectColorByPriority()
 	{
-		test = extent.startTest("Select Color By Priority");
+		//test = extent.startTest("Select Color By Priority");
 			try {
 			Pages.homapage();
 			String color="pink";
